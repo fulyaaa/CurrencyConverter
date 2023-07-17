@@ -38,9 +38,39 @@ class ViewController: UIViewController {
                 alert.addAction(okButton)
                 self.present(alert, animated: true, completion: nil)
             } else {
-                
+                //2.
                 if data != nil {
-                    
+                    do {
+                        let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! Dictionary<String, Any>
+                        
+                        DispatchQueue.main.async {
+                            if let rates = jsonResponse["rates"] as? [String: Any] {
+                                if let cad = rates["CAD"] as? Double{
+                                    self.cadLabel.text = "CAD: \(cad) "
+                                }
+                                if let chf = rates["CHF"] as? Double{
+                                    self.chfLabel.text = "CHF: \(chf) "
+                                }
+                                if let gbp = rates["GBP"] as? Double{
+                                    self.gbpLabel.text = "GBP: \(gbp) "
+                                }
+                                if let jpy = rates["JPY"] as? Double{
+                                    self.jpyLabel.text = "CAD: \(jpy) "
+                                }
+                                if let usd = rates["USD"] as? Double{
+                                    self.usdLabel.text = "USD: \(usd) "
+                                }
+                                if let turkish = rates["TRY"] as? Double{
+                                    self.tryLabel.text = "TRY: \(turkish) "
+                                }
+                            }
+                            
+                        }
+                        
+                    } catch {
+                        print("Error")
+                    }
+                   
                 }
                 
             }
